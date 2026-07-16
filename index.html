@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>유정완 변형문제 — A Unique Sport (Teqball) | 영핏 지나티처</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; background: #f0f4f4; color: #2d3436; min-height: 100vh; display: flex; justify-content: center; padding: 20px 14px; }
+  .wrap { width: 100%; max-width: 560px; }
+  .card { background: #fff; border-radius: 16px; padding: 26px 22px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 14px; }
+  h1 { font-size: 1.25rem; color: #2e7d6e; margin-bottom: 6px; }
+  .sub { font-size: 0.88rem; color: #778; margin-bottom: 18px; }
+  .badge { display: inline-block; font-size: 0.75rem; background: #e2efec; color: #2e7d6e; border-radius: 999px; padding: 3px 10px; margin-bottom: 12px; font-weight: bold; }
+  input[type=text] { width: 100%; padding: 13px; font-size: 1.05rem; border: 1.5px solid #cdd; border-radius: 10px; }
+  .btn { display: block; width: 100%; margin-top: 14px; padding: 14px; font-size: 1.05rem; font-weight: bold; color: #fff; background: #2e7d6e; border: none; border-radius: 10px; cursor: pointer; }
+  .btn:disabled { background: #b8c4c2; cursor: default; }
+  .btn-ghost { display: block; width: 100%; margin-bottom: 12px; padding: 10px; font-size: 0.9rem; font-weight: bold; color: #2e7d6e; background: #f6f9f8; border: 1.5px solid #cfe0dc; border-radius: 10px; cursor: pointer; }
+  .progress { font-size: 0.85rem; color: #789; margin-bottom: 10px; }
+  .bar { height: 6px; background: #e4ecea; border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+  .bar > div { height: 100%; background: #2e7d6e; border-radius: 3px; width: 0; transition: width .25s; }
+  .qtype { display: inline-block; font-size: 0.74rem; background: #eef4f3; color: #557; border-radius: 6px; padding: 2px 8px; margin-bottom: 8px; }
+  .qtext { font-size: 1.05rem; line-height: 1.65; margin-bottom: 16px; font-weight: bold; }
+  .qtext em { font-style: normal; background: #fff3bf; padding: 0 3px; border-radius: 3px; }
+  .choice { display: block; width: 100%; text-align: left; padding: 13px 14px; margin-bottom: 9px; font-size: 1rem; line-height: 1.5; background: #f6f9f8; border: 1.5px solid #dde5e3; border-radius: 10px; cursor: pointer; }
+  .choice:active { background: #e2efec; }
+  .num { color: #2e7d6e; font-weight: bold; margin-right: 6px; }
+  .hint { font-size: 0.78rem; color: #9ab; text-align: center; margin-top: 4px; }
+  .score-big { font-size: 2rem; font-weight: bold; color: #2e7d6e; text-align: center; margin: 10px 0; }
+  #submit-status { text-align: center; font-size: 0.92rem; margin: 12px 0; min-height: 1.2em; }
+  .exp { background: #f6f9f8; border-left: 4px solid #2e7d6e; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; font-size: 0.92rem; line-height: 1.6; }
+  .exp.wrong { border-left-color: #c0392b; }
+  .exp b { color: #2e7d6e; }
+  .exp.wrong b { color: #c0392b; }
+  .passage { background: #f6f9f8; border: 1.5px solid #dde5e3; border-radius: 10px; padding: 14px 16px; font-size: 0.92rem; line-height: 1.7; margin-bottom: 14px; }
+  .passage h2 { font-size: 0.95rem; color: #2e7d6e; margin-bottom: 8px; }
+  .passage p { margin-bottom: 8px; }
+  .hidden { display: none; }
+  .footer { text-align: center; font-size: 0.78rem; color: #9ab; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 시작 화면 -->
+  <div class="card" id="start-card">
+    <span class="badge">영핏 지나티처</span>
+    <h1>유정완 변형문제 🏆</h1>
+    <p class="sub">A Unique Sport — Teqball · 12문항 · 상위권 도전 세트<br>어휘 5 + 세부내용 5 + 추론 2 · 이름을 입력하고 시작하세요</p>
+    <input type="text" id="name-input" placeholder="이름을 입력하세요" maxlength="20" autocomplete="off">
+    <button class="btn" id="start-btn" disabled>시작하기</button>
+  </div>
+
+  <!-- 문제 화면 -->
+  <div class="card hidden" id="quiz-card">
+    <button class="btn-ghost" id="passage-btn">📖 지문 다시 보기</button>
+    <div class="passage hidden" id="passage-box">
+      <h2>A Unique Sport — TEQBALL</h2>
+      <p>Teqball is a unique combination of table tennis and soccer. It was invented in Hungary in 2012.</p>
+      <p>Like in table tennis, two to four players can play teqball at a time. They play it on a table with two sides and a glass divider in the middle. The curved table keeps the ball bouncing. Like in soccer, players play with a soccer ball. They hit it with their body instead of a racket.</p>
+      <p>Teqball matches last for three sets. There are many ways to score. For example, players can get a point when an opponent touches the ball with their hand. They must reach twelve points first to win a set.</p>
+      <p>Teqball is fun and challenging. Try it sometime!</p>
+    </div>
+    <div class="progress" id="progress"></div>
+    <div class="bar"><div id="bar-fill"></div></div>
+    <div class="qtype" id="qtype"></div>
+    <div class="qtext" id="qtext"></div>
+    <div id="choices"></div>
+    <p class="hint">숫자키 1~4로도 답할 수 있어요</p>
+  </div>
+
+  <!-- 결과 화면 -->
+  <div class="card hidden" id="result-card">
+    <span class="badge">영핏 지나티처</span>
+    <h1 id="result-title">수고했어요! 🎉</h1>
+    <div class="score-big" id="score-line"></div>
+    <div id="submit-status"></div>
+    <button class="btn" id="kakao-btn">지나티처에게 보낼 결과 복사 (카톡용)</button>
+    <div style="margin-top:20px">
+      <p class="sub" style="margin-bottom:10px">📝 전체 해설 — 천천히 읽어보세요!</p>
+      <div id="explanations"></div>
+    </div>
+  </div>
+
+  <p class="footer">제공: 영핏 지나티처</p>
+</div>
+
+<script>
+"use strict";
+
+/* ══════ 결과 자동 전송 (영핏 공통) ══════ */
+var ENGFIT_SUBMIT_URL = "https://script.google.com/macros/s/AKfycbz5IC3cEtaBGW10qZhrjwtjdtGugmcmYb4ZTHS4k-1LOqTRYzW-LfoAPyFB_ShjAqNp/exec";
+
+async function engfitSubmit(r) {
+  var body = JSON.stringify(r);
+  try {
+    var res = await fetch(ENGFIT_SUBMIT_URL, { method: "POST", body: body });
+    var j = await res.json();
+    return j.ok === true;
+  } catch (e) {
+    try {
+      await fetch(ENGFIT_SUBMIT_URL, { method: "POST", mode: "no-cors", body: body });
+      return true;
+    } catch (e2) { return false; }
+  }
+}
+
+var _engfitSent = false;
+async function engfitSubmitWithStatus(r) {
+  if (_engfitSent) return; _engfitSent = true;
+  var el = document.getElementById("submit-status");
+  el.textContent = "결과 전송 중...";
+  el.style.color = "#888";
+  var ok = await engfitSubmit(r);
+  if (ok) { el.textContent = "✓ 결과가 지나티처에게 자동 전송되었어요"; el.style.color = "#2e7d6e"; }
+  else { el.textContent = "전송이 안 됐어요 — 아래 버튼으로 복사해서 카톡으로 보내주세요!"; el.style.color = "#c0392b"; }
+}
+
+/* ══════ 문제 데이터 ══════ */
+var QUESTIONS = [
+  { type: "어휘",
+    q: "“Teqball matches <em>last</em> for three sets.”<br>여기서 <em>last</em>의 의미와 가장 가까운 것은?",
+    choices: ["continue (계속되다)", "end (끝나다)", "arrive (도착하다)", "final (마지막의)"],
+    answer: "continue (계속되다)",
+    exp: "last를 보면 '마지막'이 먼저 떠오르죠? 그런데 여기서는 <b>동사</b>로 쓰여서 '<b>계속되다, 지속되다</b>'라는 뜻이에요. “시합이 3세트 동안 계속된다”는 의미죠. 교재 Word Check에서도 last = continue를 확인했어요. final(마지막의)은 형용사라서 문장에 넣을 수도 없답니다. 한 단어가 품사에 따라 뜻이 달라지는 것, 상위권이라면 꼭 챙겨야 해요!" },
+  { type: "어휘",
+    q: "“Teqball is fun and <em>challenging</em>.”<br><em>challenging</em>과 의미가 가장 가까운 것은?",
+    choices: ["difficult (어려운)", "easy (쉬운)", "boring (지루한)", "simple (간단한)"],
+    answer: "difficult (어려운)",
+    exp: "challenging은 '<b>도전적인, 어렵지만 해볼 만한</b>'이라는 뜻이에요. challenge(도전)에서 나온 단어죠. 그래서 가장 가까운 말은 <b>difficult</b>! 반대말은 easy예요. 참고로 challenging은 '어려워서 싫다'가 아니라 '어려워서 오히려 재미있다'는 긍정적인 느낌으로 자주 쓰여요. fun and challenging = 재미있고 도전적인!" },
+  { type: "어휘",
+    q: "“Players can get a point when an <em>opponent</em> touches the ball with their hand.”<br><em>opponent</em>의 뜻은?",
+    choices: ["상대 선수", "심판", "관중", "같은 팀 동료"],
+    answer: "상대 선수",
+    exp: "opponent는 '<b>(경기에서 맞서 싸우는) 상대, 상대 선수</b>'예요. 스포츠 지문 단골 단어! “상대가 손으로 공을 건드리면 내가 점수를 얻는다”는 뜻이죠. 심판은 referee, 관중은 audience/spectator, 같은 팀 동료는 teammate라고 해요. 함께 묶어서 외워두면 스포츠 지문이 훨씬 쉬워져요." },
+  { type: "어휘",
+    q: "“They must <em>reach</em> twelve points first to win a set.”<br><em>reach</em>와 바꿔 쓸 수 있는 표현은?",
+    choices: ["get to (~에 도달하다)", "leave (떠나다)", "lose (잃다)", "throw (던지다)"],
+    answer: "get to (~에 도달하다)",
+    exp: "reach는 '<b>~에 도달하다, 이르다</b>'라는 뜻이에요. reach twelve points = 12점에 도달하다. 같은 의미로 <b>get to</b>를 쓸 수 있어요. 주의할 점 하나! reach는 뒤에 바로 목적어가 와요(reach the point ○, reach to the point ✕). arrive는 arrive at처럼 전치사가 필요하지만 reach는 필요 없다는 것, 시험에 정말 자주 나와요." },
+  { type: "어휘",
+    q: "“Teqball is a unique <em>combination</em> of table tennis and soccer.”<br><em>combination</em>의 뜻은?",
+    choices: ["조합, 결합", "경쟁", "규칙", "차이점"],
+    answer: "조합, 결합",
+    exp: "combination은 '<b>조합, 결합</b>'이에요. 동사 combine(결합하다)의 명사형이죠. “테크볼은 탁구와 축구의 독특한 조합”이라는 뜻! a combination of A and B = A와 B의 조합, 이 형태 그대로 자주 나오니 통째로 익혀두세요. 치킨+콜라 '치콜 콤보'의 콤보(combo)도 이 단어에서 나온 말이랍니다." },
+  { type: "세부내용",
+    q: "Where and when was teqball invented?",
+    choices: ["In Hungary, in 2012", "In France, in 2012", "In Hungary, in 2020", "In Germany, in 2002"],
+    answer: "In Hungary, in 2012",
+    exp: "본문에 “It was invented in <b>Hungary</b> in <b>2012</b>.”라고 딱 나와 있어요. 나라와 연도를 함께 묻는 문제는 <b>둘 다</b> 맞아야 정답이에요. 헝가리는 맞는데 연도가 2020이면 오답! 이렇게 반만 맞는 보기가 함정으로 자주 나오니, 세부내용 문제는 본문에서 정확한 위치를 찾아 확인하는 습관을 들이세요." },
+  { type: "세부내용",
+    q: "How many players can play teqball at a time?",
+    choices: ["Two to four players", "Only two players", "Exactly four players", "Five or more players"],
+    answer: "Two to four players",
+    exp: "본문의 “<b>two to four</b> players can play teqball at a time”에서 확인! two to four = 2명<b>에서</b> 4명<b>까지</b>라는 범위 표현이에요. 'Only two(딱 2명만)'나 'Exactly four(정확히 4명)'처럼 범위를 좁혀버린 보기는 오답이죠. A to B(A부터 B까지) 범위 표현을 정확히 읽어내는 게 포인트!" },
+  { type: "세부내용",
+    q: "What is in the middle of the teqball table?",
+    choices: ["A glass divider", "A net", "A hole", "A racket"],
+    answer: "A glass divider",
+    exp: "본문에 “a table with two sides and a <b>glass divider</b> in the middle”이라고 나와요. divider는 divide(나누다)+r → '<b>나누는 것, 칸막이</b>'! 탁구대에는 그물(net)이 있지만 테크볼 테이블은 <b>유리 칸막이</b>가 있다는 게 차이점이에요. 비슷한 스포츠와 헷갈리게 하는 함정(net)에 속지 않았다면 아주 잘한 거예요." },
+  { type: "세부내용",
+    q: "According to the passage, when can players get a point?",
+    choices: ["When an opponent touches the ball with their hand", "When the ball bounces on the table", "When a player kicks the ball high", "When a set finishes"],
+    answer: "When an opponent touches the ball with their hand",
+    exp: "본문에서 “players can get a point when an <b>opponent touches the ball with their hand</b>”라고 예를 들었어요. 축구처럼 <b>손을 쓰면 반칙</b>이라서 상대가 손으로 공을 건드리면 내 점수가 되는 거죠. For example(예를 들어) 뒤에 나오는 내용은 세부내용 문제로 정말 자주 출제되니 항상 눈여겨 보세요!" },
+  { type: "세부내용",
+    q: "To win a set, players must first ______.",
+    choices: ["reach twelve points", "win three sets", "score twenty points", "touch the ball with their hand"],
+    answer: "reach twelve points",
+    exp: "본문: “They must <b>reach twelve points</b> first to win a set.” → 한 세트를 이기려면 먼저 <b>12점</b>에 도달해야 해요. 'win three sets'는 세트가 아니라 <b>경기 전체</b>에 관한 내용(matches last for three sets)을 섞은 함정이에요. set(세트)와 match(경기)를 구분해서 읽는 것이 상위권의 디테일!" },
+  { type: "추론",
+    q: "Why is the teqball table curved?",
+    choices: ["To keep the ball bouncing", "To make the table look beautiful", "To help players hold the table", "To make the table lighter"],
+    answer: "To keep the ball bouncing",
+    exp: "본문의 “The <b>curved</b> table <b>keeps the ball bouncing</b>.”이 근거예요. 휘어진(curved) 테이블 덕분에 공이 계속 튀어 오르는 거죠. 즉 곡선 모양은 멋을 위해서가 아니라 <b>경기가 끊기지 않게 하는 기능</b>을 위한 거예요. 이렇게 '왜?'를 묻는 문제는 본문에서 <b>원인과 결과를 이어주는 문장</b>을 찾으면 답이 보여요. keep + 목적어 + -ing = ~가 계속 …하게 하다, 이 표현도 챙기기!" },
+  { type: "추론",
+    q: "Which one is NOT true about teqball?",
+    choices: ["Players hit the ball with a racket.", "Players play with a soccer ball.", "It was invented in Hungary.", "Matches last for three sets."],
+    answer: "Players hit the ball with a racket.",
+    exp: "본문에 “They hit it with their body <b>instead of a racket</b>.”이라고 했어요. instead of = <b>~ 대신에</b>! 라켓 <b>대신</b> 몸으로 친다고 했으니 '라켓으로 친다'는 틀린 설명이죠. NOT true 문제는 보기 4개를 하나씩 본문과 대조하며 ○×를 표시하는 게 가장 정확해요. 나머지 셋(축구공 사용, 헝가리에서 발명, 3세트 경기)은 모두 본문 그대로랍니다." }
+];
+
+/* ══════ 진행 로직 ══════ */
+var studentName = "";
+var current = 0;
+var correctCount = 0;
+var wrongNumbers = [];
+var answersLog = [];
+var startTime = 0;
+
+var nameInput = document.getElementById("name-input");
+var startBtn = document.getElementById("start-btn");
+
+nameInput.addEventListener("input", function () {
+  startBtn.disabled = nameInput.value.trim().length === 0;
+});
+
+startBtn.addEventListener("click", function () {
+  studentName = nameInput.value.trim();
+  if (!studentName) return;
+  startTime = Date.now();
+  document.getElementById("start-card").classList.add("hidden");
+  document.getElementById("quiz-card").classList.remove("hidden");
+  showQuestion();
+});
+
+document.getElementById("passage-btn").addEventListener("click", function () {
+  var box = document.getElementById("passage-box");
+  box.classList.toggle("hidden");
+  this.textContent = box.classList.contains("hidden") ? "📖 지문 다시 보기" : "📖 지문 접기";
+});
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+var CIRCLED = ["①", "②", "③", "④", "⑤"];
+var currentShuffled = [];
+
+function showQuestion() {
+  var q = QUESTIONS[current];
+  document.getElementById("progress").textContent = (current + 1) + " / " + QUESTIONS.length;
+  document.getElementById("bar-fill").style.width = Math.round(current / QUESTIONS.length * 100) + "%";
+  document.getElementById("qtype").textContent = q.type;
+  document.getElementById("qtext").innerHTML = "Q" + (current + 1) + ". " + q.q;
+  var box = document.getElementById("choices");
+  box.innerHTML = "";
+  currentShuffled = shuffle(q.choices);
+  currentShuffled.forEach(function (c, i) {
+    var b = document.createElement("button");
+    b.className = "choice";
+    b.innerHTML = '<span class="num">' + CIRCLED[i] + "</span>" + c;
+    b.addEventListener("click", function () { pick(c, CIRCLED[i]); });
+    box.appendChild(b);
+  });
+  window.scrollTo(0, 0);
+}
+
+document.addEventListener("keydown", function (e) {
+  if (document.getElementById("quiz-card").classList.contains("hidden")) return;
+  var n = parseInt(e.key, 10);
+  if (n >= 1 && n <= currentShuffled.length) pick(currentShuffled[n - 1], CIRCLED[n - 1]);
+});
+
+var locked = false;
+function pick(choice, mark) {
+  if (locked) return; locked = true;
+  var q = QUESTIONS[current];
+  var ok = choice === q.answer;
+  if (ok) correctCount++;
+  else wrongNumbers.push(current + 1);
+  answersLog.push({ no: current + 1, ok: ok, chosen: choice, answer: q.answer });
+  setTimeout(function () {
+    locked = false;
+    current++;
+    if (current < QUESTIONS.length) showQuestion();
+    else showResult();
+  }, 250);
+}
+
+function showResult() {
+  document.getElementById("quiz-card").classList.add("hidden");
+  document.getElementById("result-card").classList.remove("hidden");
+  document.getElementById("score-line").textContent = correctCount + " / " + QUESTIONS.length;
+  document.getElementById("result-title").textContent = "수고했어요, " + studentName + "! 🎉";
+
+  var expBox = document.getElementById("explanations");
+  QUESTIONS.forEach(function (q, i) {
+    var log = answersLog[i];
+    var d = document.createElement("div");
+    d.className = "exp" + (log.ok ? "" : " wrong");
+    d.innerHTML = "<b>Q" + (i + 1) + ". " + (log.ok ? "정답! 👏" : "오답 (내 답: " + log.chosen + " → 정답: " + q.answer + ")") + "</b><br>" + q.exp;
+    expBox.appendChild(d);
+  });
+
+  engfitSubmitWithStatus({
+    quizId: "jungwan-teqball-0716",
+    quizTitle: "유정완 변형문제 — A Unique Sport (Teqball) 7/16",
+    student: studentName,
+    score: correctCount,
+    total: QUESTIONS.length,
+    wrong: wrongNumbers,
+    durationSec: Math.round((Date.now() - startTime) / 1000),
+    detail: answersLog
+  });
+  window.scrollTo(0, 0);
+}
+
+document.getElementById("kakao-btn").addEventListener("click", function () {
+  var msg = "[영핏 변형문제 결과 — Teqball]\n학생: " + studentName +
+            "\n점수: " + correctCount + "/" + QUESTIONS.length +
+            "\n틀린 문항: " + (wrongNumbers.length ? wrongNumbers.join(", ") : "없음 🎉") +
+            "\n제공: 영핏 지나티처";
+  navigator.clipboard.writeText(msg).then(function () {
+    document.getElementById("kakao-btn").textContent = "복사 완료! 카톡에 붙여넣기 하세요 ✓";
+  }).catch(function () {
+    prompt("아래 내용을 길게 눌러 복사하세요", msg);
+  });
+});
+</script>
+</body>
+</html>
